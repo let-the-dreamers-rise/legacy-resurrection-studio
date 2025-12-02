@@ -111,41 +111,6 @@ npm start
 
 ---
 
-## 🎬 3-Minute Judge Demo Script
-
-**[0:00-0:30] Introduction & Problem**
-- Show dashboard: "Legacy modernization is a $300B problem"
-- Explain the three chambers concept
-- Highlight enterprise pain points
-
-**[0:30-1:15] Legacy Reanimator Demo**
-- Load sample jQuery/Bootstrap code
-- Click "Analyze Code"
-- Show risk score, detected patterns, recommendations
-- Highlight chamber routing suggestions
-
-**[1:15-2:00] API Necromancer Demo**
-- Load sample WSDL
-- Click "Convert to REST"
-- Show extracted endpoints with HTTP methods
-- Display OpenAPI spec with syntax highlighting
-- Download OpenAPI JSON
-
-**[2:00-2:45] Ghost UI Converter Demo**
-- Load sample Bootstrap 3 form
-- Click "Convert to React"
-- Show generated TypeScript React component
-- Highlight "What Changed" section
-- Download component file
-
-**[2:45-3:00] Closing**
-- Show migration report generation
-- Emphasize production-ready artifacts
-- Mention Kiro AI's role in rapid development
-- "From haunted codebase to modern architecture in minutes"
-
----
-
 ## 🤖 How We Used Kiro
 
 This project showcases deep integration with Kiro AI's development workflow:
