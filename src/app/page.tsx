@@ -161,15 +161,6 @@ export default function HomePage() {
               >
                 GitHub
               </a>
-              <a
-                href="https://devpost.com/software/legacy-resurrection-studio"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Devpost Submission"
-                className="px-4 py-2 bg-shadow-gray hover:bg-mist-gray text-spirit-gray hover:text-ghost-white border border-fog-gray rounded-lg text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-fog-gray focus:ring-offset-2 focus:ring-offset-void-black"
-              >
-                Devpost
-              </a>
               <Link
                 href="/docs"
                 aria-label="Documentation"
