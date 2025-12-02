@@ -245,11 +245,6 @@ export default function DocsPage() {
               description="View source code and contribute"
             />
             <ExternalLinkCard
-              href="https://devpost.com/software/legacy-resurrection-studio"
-              title="Devpost Submission"
-              description="Kiroween 2025 hackathon entry"
-            />
-            <ExternalLinkCard
               href="https://github.com/let-the-dreamers-rise/legacy-resurrection-studio#readme"
               title="README"
               description="Quick start and installation guide"
