@@ -27,7 +27,7 @@ export default function DocsPage() {
             Documentation · Legacy Resurrection Studio
           </h2>
           <p className="text-xl text-spirit-gray max-w-3xl mx-auto">
-            A necromancer's manual for raising legacy systems into modern architectures.
+            A necromancer&apos;s manual for raising legacy systems into modern architectures.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export default function DocsPage() {
 
             <div className="bg-void-black border border-fog-gray rounded-lg p-6 font-mono text-sm">
               <div className="text-spirit-gray">
-                <div className="mb-2 text-necro-purple-light">// Modernization Pipeline</div>
+                <div className="mb-2 text-necro-purple-light">{/* Modernization Pipeline */}</div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-phantom-gray">Legacy Input</span>
                   <span className="text-necro-purple">→</span>
