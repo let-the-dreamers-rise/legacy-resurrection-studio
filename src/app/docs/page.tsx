@@ -240,7 +240,7 @@ export default function DocsPage() {
               description="Try the production deployment"
             />
             <ExternalLinkCard
-              href="https://github.com/AshwinGoyal705/legacy-resurrection-studio"
+              href="https://github.com/let-the-dreamers-rise/legacy-resurrection-studio"
               title="GitHub Repository"
               description="View source code and contribute"
             />
@@ -250,7 +250,7 @@ export default function DocsPage() {
               description="Kiroween 2025 hackathon entry"
             />
             <ExternalLinkCard
-              href="https://github.com/AshwinGoyal705/legacy-resurrection-studio#readme"
+              href="https://github.com/let-the-dreamers-rise/legacy-resurrection-studio#readme"
               title="README"
               description="Quick start and installation guide"
             />

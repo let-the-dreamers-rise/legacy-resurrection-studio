@@ -153,7 +153,7 @@ export default function HomePage() {
                 Live Demo
               </a>
               <a
-                href="https://github.com/AshwinGoyal705/legacy-resurrection-studio"
+                href="https://github.com/let-the-dreamers-rise/legacy-resurrection-studio"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub Repository"
