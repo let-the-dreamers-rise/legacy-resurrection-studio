@@ -34,3 +34,6 @@ next-env.d.ts
 
 # kiro logs
 .kiro/logs/
+
+.vercel
+.env*.local
