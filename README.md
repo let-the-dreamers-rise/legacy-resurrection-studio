@@ -90,7 +90,7 @@ Legacy Resurrection Studio is an enterprise-ready toolkit for strategic legacy m
 
 ```bash
 # Clone the repository
-git clone https://github.com/AshwinGoyal705/legacy-resurrection-studio.git
+git clone https://github.com/let-the-dreamers-rise/legacy-resurrection-studio.git
 cd legacy-resurrection-studio
 
 # Install dependencies
@@ -242,7 +242,7 @@ MIT License - see [LICENSE](./LICENSE) for details
 ## 📞 Links
 
 - **Live Demo**: [https://legacy-resurrection-studio.vercel.app](https://legacy-resurrection-studio.vercel.app)
-- **GitHub**: [https://github.com/AshwinGoyal705/legacy-resurrection-studio](https://github.com/AshwinGoyal705/legacy-resurrection-studio)
+- **GitHub**: [https://github.com/let-the-dreamers-rise/legacy-resurrection-studio](https://github.com/let-the-dreamers-rise/legacy-resurrection-studio)
 - **Devpost**: [https://devpost.com/software/legacy-resurrection-studio](https://devpost.com/software/legacy-resurrection-studio)
 
 ---

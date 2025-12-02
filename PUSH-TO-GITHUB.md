@@ -1,8 +1,8 @@
 # 🚀 Ready to Push to GitHub!
 
 ## Your GitHub Info
-- **Username**: AshwinGoyal705
-- **Repo URL**: https://github.com/AshwinGoyal705/legacy-resurrection-studio
+- **Username**: let-the-dreamers-rise
+- **Repo URL**: https://github.com/let-the-dreamers-rise/legacy-resurrection-studio
 
 ---
 
@@ -31,7 +31,7 @@ git init
 git add .
 git commit -m "feat: Legacy Resurrection Studio - Kiroween 2025 submission"
 git branch -M main
-git remote add origin https://github.com/AshwinGoyal705/legacy-resurrection-studio.git
+git remote add origin https://github.com/let-the-dreamers-rise/legacy-resurrection-studio.git
 git push -u origin main
 ```
 
@@ -106,7 +106,7 @@ Make sure these sections are visible:
 
 After pushing, check:
 
-1. **Go to**: https://github.com/AshwinGoyal705/legacy-resurrection-studio
+1. **Go to**: https://github.com/let-the-dreamers-rise/legacy-resurrection-studio
 2. **Verify**:
    - [ ] .kiro directory is visible (click into it)
    - [ ] MIT License shows in About section
@@ -116,7 +116,7 @@ After pushing, check:
 
 3. **Test Clone**:
    ```bash
-   git clone https://github.com/AshwinGoyal705/legacy-resurrection-studio.git test-clone
+   git clone https://github.com/let-the-dreamers-rise/legacy-resurrection-studio.git test-clone
    cd test-clone
    npm install
    npm run build
@@ -192,7 +192,7 @@ Your repo is:
 
 ## 📞 Quick Reference
 
-- **GitHub**: https://github.com/AshwinGoyal705/legacy-resurrection-studio
+- **GitHub**: https://github.com/let-the-dreamers-rise/legacy-resurrection-studio
 - **Vercel**: [Deploy after push]
 - **Devpost**: [Submit after video]
 - **Demo Video**: [Record after Vercel deployment]
