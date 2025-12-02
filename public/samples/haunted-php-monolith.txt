@@ -1,0 +1,151 @@
+<?php
+// Legacy PHP Monolith - Circa 2008
+// WARNING: Contains multiple security vulnerabilities and anti-patterns
+
+// Direct MySQL connection (deprecated mysql_* functions)
+$db = mysql_connect("localhost", "root", "password123");
+mysql_select_db("ecommerce_db", $db);
+
+// Hardcoded credentials
+$api_key = "sk_live_abc123def456ghi789";
+$secret_token = "my_super_secret_token_2008";
+
+// SQL Injection vulnerability - string concatenation
+$user_id = $_GET['id'];
+$query = "SELECT * FROM users WHERE id = " . $user_id;
+$result = mysql_query($query);
+
+// XSS vulnerability - no output escaping
+while ($row = mysql_fetch_array($result)) {
+    echo "<h1>Welcome " . $row['username'] . "</h1>";
+    echo "<p>Email: " . $row['email'] . "</p>";
+}
+
+// God function - does everything
+function processOrder($order_data) {
+    // 500+ lines of mixed concerns
+    global $db, $api_key;
+    
+    // Validate input (poorly)
+    if (!isset($order_data['user_id'])) {
+        die("Error");
+    }
+    
+    // Calculate total
+    $total = 0;
+    foreach ($order_data['items'] as $item) {
+        $total += $item['price'] * $item['quantity'];
+    }
+    
+    // Apply discount (hardcoded business logic)
+    if ($total > 100) {
+        $total = $total * 0.9;
+    }
+    
+    // Insert order (SQL injection again)
+    $sql = "INSERT INTO orders (user_id, total, status) VALUES (" . 
+           $order_data['user_id'] . ", " . $total . ", 'pending')";
+    mysql_query($sql);
+    
+    // Send email (inline SMTP)
+    $to = $order_data['email'];
+    $subject = "Order Confirmation";
+    $message = "Your order total is $" . $total;
+    mail($to, $subject, $message);
+    
+    // Call payment API (no error handling)
+    $ch = curl_init("https://payment-api.com/charge");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "amount=" . $total . "&key=" . $api_key);
+    $response = curl_exec($ch);
+    
+    // Log to file (no rotation, grows forever)
+    file_put_contents("/var/log/orders.log", date('Y-m-d H:i:s') . " - Order processed\n", FILE_APPEND);
+    
+    return true;
+}
+
+// jQuery spaghetti in PHP template
+?>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Place Order</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="orderForm">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <select class="form-control" id="product">
+                                    <option value="1">Widget ($50)</option>
+                                    <option value="2">Gadget ($100)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Order</button>
+                        </form>
+                        <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Inline JavaScript with jQuery
+        var apiKey = "<?php echo $api_key; ?>"; // Exposing secrets to client
+        
+        $(document).ready(function() {
+            $('#orderForm').submit(function(e) {
+                e.preventDefault();
+                
+                var productId = $('#product').val();
+                
+                // AJAX with callback hell
+                $.ajax({
+                    url: '/api/order.php',
+                    method: 'POST',
+                    data: { product_id: productId, api_key: apiKey },
+                    success: function(response) {
+                        $('#result').html('<div class="alert alert-success">' + response + '</div>');
+                        
+                        // Nested AJAX call
+                        $.ajax({
+                            url: '/api/inventory.php',
+                            method: 'GET',
+                            success: function(inventory) {
+                                console.log('Inventory updated');
+                                
+                                // Another nested call
+                                $.ajax({
+                                    url: '/api/analytics.php',
+                                    method: 'POST',
+                                    data: { event: 'order_placed' },
+                                    success: function() {
+                                        console.log('Analytics tracked');
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    error: function() {
+                        alert('Error processing order');
+                    }
+                });
+            });
+            
+            // Direct DOM manipulation
+            document.getElementById('product').onchange = function() {
+                var price = this.options[this.selectedIndex].text.match(/\$(\d+)/)[1];
+                document.getElementById('result').innerHTML = 'Selected price: $' + price;
+            };
+        });
+    </script>
+</body>
+</html>

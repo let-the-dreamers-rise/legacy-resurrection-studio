@@ -1,0 +1,88 @@
+name: Legacy Code Analysis Spec
+version: 1.0.0
+description: |
+  Specification for the Legacy Reanimator chamber - analyzes codebases
+  for legacy patterns, calculates risk scores, and routes to appropriate
+  resurrection tools.
+
+inputs:
+  - name: codebase_files
+    type: file[]
+    description: Array of source files to analyze
+    formats: [.js, .jsx, .html, .css, .xml, .wsdl]
+  
+  - name: analysis_depth
+    type: enum
+    values: [quick, standard, deep]
+    default: standard
+    description: How thorough the analysis should be
+
+outputs:
+  - name: risk_report
+    type: object
+    structure:
+      overall_score: number (0-100)
+      patterns_detected: pattern[]
+      recommendations: recommendation[]
+      resurrection_routes: route[]
+  
+  - name: pattern
+    type: object
+    structure:
+      id: string
+      name: string
+      severity: enum [low, medium, high, critical]
+      occurrences: number
+      locations: location[]
+      modernization_path: string
+
+detection_rules:
+  soap_patterns:
+    - pattern: "xmlns:soap|<soap:|<wsdl:"
+      severity: high
+      route: api-necromancer
+      message: "SOAP service detected - ready for REST resurrection"
+  
+  jquery_patterns:
+    - pattern: "\\$\\(|jQuery\\("
+      severity: medium
+      route: ghost-ui
+      message: "jQuery detected - convert to React hooks"
+  
+  bootstrap_patterns:
+    - pattern: "class=\".*\\b(col-|row|container|btn-)"
+      severity: low
+      route: ghost-ui
+      message: "Bootstrap classes detected - migrate to Tailwind"
+  
+  legacy_js_patterns:
+    - pattern: "var\\s+\\w+\\s*="
+      severity: low
+      route: reanimator
+      message: "var declarations - modernize to const/let"
+    
+    - pattern: "function\\s+\\w+\\s*\\("
+      severity: low
+      route: reanimator
+      message: "Function declarations - consider arrow functions"
+
+scoring_algorithm: |
+  Base score = 100
+  For each pattern:
+    - critical: -25 points
+    - high: -15 points
+    - medium: -8 points
+    - low: -3 points
+  Minimum score: 0
+
+file_generation:
+  report_template: "src/lib/analysis/templates/report.ts"
+  pattern_detector: "src/lib/analysis/detector.ts"
+  scorer: "src/lib/analysis/scorer.ts"
+  router: "src/lib/analysis/router.ts"
+
+style_rules:
+  - Use TypeScript strict mode
+  - Export interfaces for all data structures
+  - Include JSDoc comments for public APIs
+  - Use functional programming patterns where possible

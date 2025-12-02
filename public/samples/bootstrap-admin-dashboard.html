@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body { padding-top: 70px; }
+        .sidebar { position: fixed; top: 51px; bottom: 0; left: 0; z-index: 1000; padding: 20px; overflow-x: hidden; overflow-y: auto; background-color: #f5f5f5; border-right: 1px solid #eee; }
+        .main-content { margin-left: 220px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Legacy Admin</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    <li><a href="#" id="logoutBtn"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#users">Users</a></li>
+            <li><a href="#orders">Orders</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#reports">Reports</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
+        <h1 class="page-header">Dashboard</h1>
+
+        <!-- Stats Cards -->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-user" style="font-size: 50px;"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div style="font-size: 30px;" id="userCount">0</div>
+                                <div>Total Users</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#users">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><span class="glyphicon glyphicon-circle-arrow-right"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-shopping-cart" style="font-size: 50px;"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div style="font-size: 30px;" id="orderCount">0</div>
+                                <div>New Orders</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#orders">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><span class="glyphicon glyphicon-circle-arrow-right"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-tasks" style="font-size: 50px;"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div style="font-size: 30px;" id="taskCount">0</div>
+                                <div>Pending Tasks</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#tasks">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><span class="glyphicon glyphicon-circle-arrow-right"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-exclamation-sign" style="font-size: 50px;"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div style="font-size: 30px;" id="alertCount">0</div>
+                                <div>Alerts</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#alerts">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><span class="glyphicon glyphicon-circle-arrow-right"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management Table -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recent Users</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="userTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by jQuery -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add User Form -->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add New User</h3>
+            </div>
+            <div class="panel-body">
+                <form id="addUserForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="userName" placeholder="Enter name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="userEmail" placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Role</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="userRole">
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                                <option value="moderator">Moderator</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Add User</button>
+                            <button type="button" class="btn btn-default" id="cancelBtn">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="formMessage" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables (bad practice)
+        var users = [];
+        var apiEndpoint = "https://api.example.com";
+        var authToken = "hardcoded_token_12345"; // Security issue!
+
+        // Document ready - jQuery spaghetti
+        $(document).ready(function() {
+            loadDashboardStats();
+            loadUsers();
+
+            // Form submission with callback hell
+            $('#addUserForm').submit(function(e) {
+                e.preventDefault();
+                
+                var name = $('#userName').val();
+                var email = $('#userEmail').val();
+                var role = $('#userRole').val();
+
+                // Nested AJAX calls
+                $.ajax({
+                    url: apiEndpoint + '/users',
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + authToken },
+                    data: JSON.stringify({ name: name, email: email, role: role }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        $('#formMessage').html('<div class="alert alert-success">User added successfully!</div>').show();
+                        $('#addUserForm')[0].reset();
+                        
+                        // Reload users
+                        $.ajax({
+                            url: apiEndpoint + '/users',
+                            method: 'GET',
+                            success: function(data) {
+                                users = data;
+                                renderUserTable();
+                                
+                                // Update stats
+                                $.ajax({
+                                    url: apiEndpoint + '/stats',
+                                    method: 'GET',
+                                    success: function(stats) {
+                                        $('#userCount').text(stats.users);
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        $('#formMessage').html('<div class="alert alert-danger">Error: ' + error + '</div>').show();
+                    }
+                });
+            });
+
+            // Cancel button
+            $('#cancelBtn').click(function() {
+                $('#addUserForm')[0].reset();
+                $('#formMessage').hide();
+            });
+
+            // Logout
+            $('#logoutBtn').click(function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    window.location.href = '/logout';
+                }
+            });
+
+            // Direct DOM manipulation
+            $('.nav-sidebar li').click(function() {
+                $('.nav-sidebar li').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+
+        // Load dashboard stats
+        function loadDashboardStats() {
+            $.ajax({
+                url: apiEndpoint + '/stats',
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + authToken },
+                success: function(data) {
+                    document.getElementById('userCount').innerHTML = data.users;
+                    document.getElementById('orderCount').innerHTML = data.orders;
+                    document.getElementById('taskCount').innerHTML = data.tasks;
+                    document.getElementById('alertCount').innerHTML = data.alerts;
+                },
+                error: function() {
+                    alert('Failed to load stats');
+                }
+            });
+        }
+
+        // Load users
+        function loadUsers() {
+            $.ajax({
+                url: apiEndpoint + '/users',
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + authToken },
+                success: function(data) {
+                    users = data;
+                    renderUserTable();
+                },
+                error: function() {
+                    alert('Failed to load users');
+                }
+            });
+        }
+
+        // Render user table (imperative DOM manipulation)
+        function renderUserTable() {
+            var tbody = $('#userTable tbody');
+            tbody.empty();
+            
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
+                var statusClass = user.status === 'active' ? 'success' : 'warning';
+                var row = '<tr>' +
+                    '<td>' + user.id + '</td>' +
+                    '<td>' + user.name + '</td>' +
+                    '<td>' + user.email + '</td>' +
+                    '<td><span class="label label-' + statusClass + '">' + user.status + '</span></td>' +
+                    '<td>' +
+                        '<button class="btn btn-xs btn-info" onclick="editUser(' + user.id + ')">Edit</button> ' +
+                        '<button class="btn btn-xs btn-danger" onclick="deleteUser(' + user.id + ')">Delete</button>' +
+                    '</td>' +
+                '</tr>';
+                tbody.append(row);
+            }
+        }
+
+        // Edit user (inline onclick - bad practice)
+        function editUser(id) {
+            var user = users.find(function(u) { return u.id === id; });
+            if (user) {
+                $('#userName').val(user.name);
+                $('#userEmail').val(user.email);
+                $('#userRole').val(user.role);
+            }
+        }
+
+        // Delete user
+        function deleteUser(id) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                $.ajax({
+                    url: apiEndpoint + '/users/' + id,
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + authToken },
+                    success: function() {
+                        alert('User deleted successfully');
+                        loadUsers();
+                        loadDashboardStats();
+                    },
+                    error: function() {
+                        alert('Failed to delete user');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

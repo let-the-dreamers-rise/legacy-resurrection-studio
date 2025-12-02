@@ -1,0 +1,102 @@
+name: SOAP to REST Necromancer Spec
+version: 1.0.0
+description: |
+  Specification for the API Necromancer chamber - transforms SOAP/WSDL
+  services into modern REST APIs with OpenAPI 3.0 specifications.
+
+inputs:
+  - name: wsdl_content
+    type: string
+    description: Raw WSDL XML content
+  
+  - name: soap_endpoint
+    type: url
+    description: Original SOAP endpoint URL (optional)
+  
+  - name: conversion_options
+    type: object
+    properties:
+      generate_stubs: boolean
+      target_framework: enum [express, nextjs, fastapi]
+      auth_strategy: enum [none, bearer, apikey, oauth2]
+
+outputs:
+  - name: openapi_spec
+    type: object
+    format: OpenAPI 3.0
+    structure:
+      openapi: "3.0.0"
+      info: object
+      servers: server[]
+      paths: paths_object
+      components: components_object
+  
+  - name: rest_endpoints
+    type: endpoint[]
+    structure:
+      method: enum [GET, POST, PUT, DELETE, PATCH]
+      path: string
+      operation_id: string
+      request_body: schema
+      responses: response_map
+  
+  - name: code_stubs
+    type: file[]
+    description: Generated API route handlers
+
+transformation_rules:
+  operation_mapping:
+    - soap_operation: "Get*"
+      rest_method: GET
+      path_pattern: "/{resource}"
+    
+    - soap_operation: "Create*|Add*|Insert*"
+      rest_method: POST
+      path_pattern: "/{resource}"
+    
+    - soap_operation: "Update*|Modify*"
+      rest_method: PUT
+      path_pattern: "/{resource}/{id}"
+    
+    - soap_operation: "Delete*|Remove*"
+      rest_method: DELETE
+      path_pattern: "/{resource}/{id}"
+    
+    - soap_operation: "*"
+      rest_method: POST
+      path_pattern: "/operations/{operationName}"
+
+  type_mapping:
+    xsd_string: string
+    xsd_int: integer
+    xsd_long: integer (format: int64)
+    xsd_double: number (format: double)
+    xsd_boolean: boolean
+    xsd_date: string (format: date)
+    xsd_dateTime: string (format: date-time)
+
+  naming_conventions:
+    - Convert PascalCase operations to kebab-case paths
+    - Remove namespace prefixes
+    - Pluralize resource names
+    - Use RESTful conventions
+
+file_generation:
+  parser: "src/lib/soap/parser.ts"
+  transformer: "src/lib/soap/transformer.ts"
+  openapi_generator: "src/lib/soap/openapi-generator.ts"
+  stub_generator: "src/lib/soap/stub-generator.ts"
+  route_template: "src/lib/soap/templates/route.ts"
+
+validation_rules:
+  - Ensure all WSDL operations are mapped
+  - Validate OpenAPI spec against 3.0 schema
+  - Check for naming conflicts in paths
+  - Verify all types are properly converted
+
+style_rules:
+  - Generate idiomatic REST paths
+  - Include comprehensive descriptions
+  - Add example request/response bodies
+  - Document authentication requirements
+  - Include error response schemas

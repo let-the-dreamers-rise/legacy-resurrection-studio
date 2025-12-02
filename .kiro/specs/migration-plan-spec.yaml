@@ -1,0 +1,159 @@
+name: Migration Plan Generator Spec
+version: 1.0.0
+description: |
+  Specification for generating consistent, professional migration plans
+  and documentation for legacy code resurrection.
+
+inputs:
+  - name: analysis_results
+    type: object
+    description: Results from legacy analysis
+  
+  - name: target_technology
+    type: string
+    description: Target modern technology stack
+  
+  - name: project_context
+    type: object
+    properties:
+      name: string
+      current_stack: string[]
+      team_size: number
+      timeline: string
+
+outputs:
+  - name: migration_plan
+    type: document
+    format: markdown
+    sections:
+      - executive_summary
+      - current_state_assessment
+      - target_architecture
+      - migration_strategy
+      - risk_analysis
+      - timeline_phases
+      - resource_requirements
+      - success_metrics
+
+document_structure:
+  executive_summary:
+    length: "2-3 paragraphs"
+    tone: "Professional, confident"
+    includes:
+      - "Business value proposition"
+      - "High-level approach"
+      - "Expected outcomes"
+  
+  current_state_assessment:
+    format: "Structured analysis"
+    includes:
+      - "Technology inventory"
+      - "Risk score breakdown"
+      - "Technical debt quantification"
+      - "Critical dependencies"
+  
+  target_architecture:
+    format: "Visual + descriptive"
+    includes:
+      - "Technology stack diagram"
+      - "Component architecture"
+      - "Integration points"
+      - "Infrastructure requirements"
+  
+  migration_strategy:
+    format: "Phased approach"
+    includes:
+      - "Migration pattern (strangler, big bang, parallel)"
+      - "Phase breakdown"
+      - "Rollback strategy"
+      - "Testing approach"
+  
+  risk_analysis:
+    format: "Risk matrix"
+    includes:
+      - "Technical risks"
+      - "Business risks"
+      - "Mitigation strategies"
+      - "Contingency plans"
+  
+  timeline_phases:
+    format: "Gantt-style breakdown"
+    includes:
+      - "Phase durations"
+      - "Milestones"
+      - "Dependencies"
+      - "Go/no-go criteria"
+  
+  resource_requirements:
+    format: "Resource matrix"
+    includes:
+      - "Team composition"
+      - "Skill requirements"
+      - "Tool/infrastructure needs"
+      - "Budget estimates"
+  
+  success_metrics:
+    format: "KPI dashboard"
+    includes:
+      - "Technical metrics"
+      - "Business metrics"
+      - "Quality metrics"
+      - "Acceptance criteria"
+
+voice_and_tone:
+  style: "Professional technical writing"
+  perspective: "Third person, authoritative"
+  language: "Clear, precise, jargon-appropriate"
+  formatting: "Consistent markdown with tables and lists"
+  
+  phrases_to_use:
+    - "Strategic modernization"
+    - "Risk-mitigated approach"
+    - "Incremental delivery"
+    - "Business continuity"
+    - "Technical excellence"
+  
+  phrases_to_avoid:
+    - "Easy" or "simple"
+    - "Just" or "simply"
+    - "Obviously"
+    - Overly casual language
+
+templates:
+  risk_item: |
+    **Risk**: [Risk description]
+    **Likelihood**: [Low/Medium/High]
+    **Impact**: [Low/Medium/High]
+    **Mitigation**: [Mitigation strategy]
+  
+  phase_item: |
+    ### Phase [N]: [Phase Name]
+    **Duration**: [X weeks]
+    **Objectives**:
+    - [Objective 1]
+    - [Objective 2]
+    **Deliverables**:
+    - [Deliverable 1]
+    - [Deliverable 2]
+    **Success Criteria**:
+    - [Criterion 1]
+  
+  metric_item: |
+    - **[Metric Name]**: [Description]
+      - Baseline: [Current value]
+      - Target: [Target value]
+      - Measurement: [How to measure]
+
+file_generation:
+  generator: "src/lib/migration/plan-generator.ts"
+  templates: "src/lib/migration/templates/"
+  formatter: "src/lib/migration/formatter.ts"
+
+style_rules:
+  - Use consistent heading hierarchy
+  - Include table of contents for long documents
+  - Add visual diagrams where helpful
+  - Use tables for structured data
+  - Include code examples where relevant
+  - Add timestamps and version numbers
+  - Include author/generator attribution

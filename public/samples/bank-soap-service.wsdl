@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://bank.example.com/services"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://bank.example.com/services"
+             name="BankingService">
+
+  <types>
+    <xsd:schema targetNamespace="http://bank.example.com/services">
+      <xsd:complexType name="Account">
+        <xsd:sequence>
+          <xsd:element name="accountNumber" type="xsd:string"/>
+          <xsd:element name="accountType" type="xsd:string"/>
+          <xsd:element name="balance" type="xsd:decimal"/>
+          <xsd:element name="currency" type="xsd:string"/>
+          <xsd:element name="status" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      
+      <xsd:complexType name="Transaction">
+        <xsd:sequence>
+          <xsd:element name="transactionId" type="xsd:string"/>
+          <xsd:element name="accountNumber" type="xsd:string"/>
+          <xsd:element name="amount" type="xsd:decimal"/>
+          <xsd:element name="type" type="xsd:string"/>
+          <xsd:element name="timestamp" type="xsd:dateTime"/>
+          <xsd:element name="description" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      
+      <xsd:complexType name="TransferRequest">
+        <xsd:sequence>
+          <xsd:element name="fromAccount" type="xsd:string"/>
+          <xsd:element name="toAccount" type="xsd:string"/>
+          <xsd:element name="amount" type="xsd:decimal"/>
+          <xsd:element name="currency" type="xsd:string"/>
+          <xsd:element name="reference" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+
+  <!-- Get Account Balance -->
+  <message name="GetBalanceRequest">
+    <part name="accountNumber" type="xsd:string"/>
+    <part name="customerId" type="xsd:string"/>
+  </message>
+  
+  <message name="GetBalanceResponse">
+    <part name="account" type="tns:Account"/>
+  </message>
+
+  <!-- List Transactions -->
+  <message name="ListTransactionsRequest">
+    <part name="accountNumber" type="xsd:string"/>
+    <part name="startDate" type="xsd:dateTime"/>
+    <part name="endDate" type="xsd:dateTime"/>
+    <part name="limit" type="xsd:int"/>
+  </message>
+  
+  <message name="ListTransactionsResponse">
+    <part name="transactions" type="tns:Transaction" maxOccurs="unbounded"/>
+    <part name="totalCount" type="xsd:int"/>
+  </message>
+
+  <!-- Transfer Funds -->
+  <message name="TransferFundsRequest">
+    <part name="transfer" type="tns:TransferRequest"/>
+    <part name="authToken" type="xsd:string"/>
+  </message>
+  
+  <message name="TransferFundsResponse">
+    <part name="transactionId" type="xsd:string"/>
+    <part name="status" type="xsd:string"/>
+    <part name="timestamp" type="xsd:dateTime"/>
+  </message>
+
+  <!-- Create Account -->
+  <message name="CreateAccountRequest">
+    <part name="customerId" type="xsd:string"/>
+    <part name="accountType" type="xsd:string"/>
+    <part name="initialDeposit" type="xsd:decimal"/>
+    <part name="currency" type="xsd:string"/>
+  </message>
+  
+  <message name="CreateAccountResponse">
+    <part name="account" type="tns:Account"/>
+    <part name="accountNumber" type="xsd:string"/>
+  </message>
+
+  <!-- Update Account Status -->
+  <message name="UpdateAccountStatusRequest">
+    <part name="accountNumber" type="xsd:string"/>
+    <part name="newStatus" type="xsd:string"/>
+    <part name="reason" type="xsd:string"/>
+  </message>
+  
+  <message name="UpdateAccountStatusResponse">
+    <part name="success" type="xsd:boolean"/>
+    <part name="message" type="xsd:string"/>
+  </message>
+
+  <!-- Delete Account -->
+  <message name="CloseAccountRequest">
+    <part name="accountNumber" type="xsd:string"/>
+    <part name="customerId" type="xsd:string"/>
+    <part name="reason" type="xsd:string"/>
+  </message>
+  
+  <message name="CloseAccountResponse">
+    <part name="success" type="xsd:boolean"/>
+    <part name="finalBalance" type="xsd:decimal"/>
+  </message>
+
+  <portType name="BankingServicePortType">
+    <operation name="GetBalance">
+      <documentation>Retrieve account balance and details</documentation>
+      <input message="tns:GetBalanceRequest"/>
+      <output message="tns:GetBalanceResponse"/>
+    </operation>
+    
+    <operation name="ListTransactions">
+      <documentation>List account transactions within date range</documentation>
+      <input message="tns:ListTransactionsRequest"/>
+      <output message="tns:ListTransactionsResponse"/>
+    </operation>
+    
+    <operation name="TransferFunds">
+      <documentation>Transfer funds between accounts</documentation>
+      <input message="tns:TransferFundsRequest"/>
+      <output message="tns:TransferFundsResponse"/>
+    </operation>
+    
+    <operation name="CreateAccount">
+      <documentation>Create new bank account</documentation>
+      <input message="tns:CreateAccountRequest"/>
+      <output message="tns:CreateAccountResponse"/>
+    </operation>
+    
+    <operation name="UpdateAccountStatus">
+      <documentation>Update account status (active, frozen, closed)</documentation>
+      <input message="tns:UpdateAccountStatusRequest"/>
+      <output message="tns:UpdateAccountStatusResponse"/>
+    </operation>
+    
+    <operation name="CloseAccount">
+      <documentation>Close account and return final balance</documentation>
+      <input message="tns:CloseAccountRequest"/>
+      <output message="tns:CloseAccountResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="BankingServiceBinding" type="tns:BankingServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    
+    <operation name="GetBalance">
+      <soap:operation soapAction="http://bank.example.com/services/GetBalance"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    
+    <operation name="ListTransactions">
+      <soap:operation soapAction="http://bank.example.com/services/ListTransactions"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    
+    <operation name="TransferFunds">
+      <soap:operation soapAction="http://bank.example.com/services/TransferFunds"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    
+    <operation name="CreateAccount">
+      <soap:operation soapAction="http://bank.example.com/services/CreateAccount"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    
+    <operation name="UpdateAccountStatus">
+      <soap:operation soapAction="http://bank.example.com/services/UpdateAccountStatus"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    
+    <operation name="CloseAccount">
+      <soap:operation soapAction="http://bank.example.com/services/CloseAccount"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <service name="BankingService">
+    <documentation>Legacy SOAP Banking Service - Requires REST modernization</documentation>
+    <port name="BankingServicePort" binding="tns:BankingServiceBinding">
+      <soap:address location="http://legacy-bank.example.com:8080/services/banking"/>
+    </port>
+  </service>
+</definitions>

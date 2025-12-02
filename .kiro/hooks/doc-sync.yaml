@@ -1,0 +1,29 @@
+name: Documentation Sync Hook
+description: Auto-generates and maintains documentation when spec files or conversion rules change
+version: 1.0.0
+
+triggers:
+  - event: file_saved
+    file_patterns:
+      - ".kiro/specs/*.yaml"
+      - "src/lib/*/types.ts"
+      - "src/lib/*/transformer.ts"
+
+actions:
+  - type: agent_message
+    message: |
+      A spec or type definition file was updated. Please:
+      1. Review the changes for consistency with other specs
+      2. Update any affected documentation in /docs
+      3. Regenerate migration plan templates if transformation rules changed
+      4. Update API documentation if endpoints changed
+      
+      Changed file: {{file_path}}
+
+  - type: shell_command
+    command: echo "Spec file updated: {{file_path}}" >> .kiro/logs/spec-changes.log
+    condition: file_exists(".kiro/logs")
+
+metadata:
+  priority: medium
+  auto_approve: false

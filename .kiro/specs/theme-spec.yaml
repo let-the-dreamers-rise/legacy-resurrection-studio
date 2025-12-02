@@ -1,0 +1,145 @@
+name: Spooky Dark Theme Spec
+version: 1.0.0
+description: |
+  Design system specification for Legacy Resurrection Studio.
+  Dark, elegant, professional with subtle spooky elements.
+
+color_palette:
+  primary:
+    necro_purple: "#8B5CF6"      # Main accent - violet
+    necro_purple_dark: "#6D28D9" # Hover states
+    necro_purple_light: "#A78BFA" # Highlights
+  
+  background:
+    void_black: "#0A0A0F"        # Main background
+    shadow_gray: "#1A1A24"       # Cards, panels
+    mist_gray: "#2A2A3A"         # Elevated surfaces
+    fog_gray: "#3A3A4A"          # Borders, dividers
+  
+  text:
+    ghost_white: "#F9FAFB"       # Primary text
+    spirit_gray: "#D1D5DB"       # Secondary text
+    phantom_gray: "#9CA3AF"      # Tertiary text
+    whisper_gray: "#6B7280"      # Disabled text
+  
+  semantic:
+    success_green: "#10B981"     # Success states
+    warning_amber: "#F59E0B"     # Warnings
+    danger_red: "#EF4444"        # Errors, critical
+    info_blue: "#3B82F6"         # Information
+  
+  chamber_accents:
+    reanimator_cyan: "#06B6D4"   # Legacy Reanimator
+    necromancer_violet: "#8B5CF6" # API Necromancer
+    ghost_emerald: "#10B981"     # Ghost UI
+
+typography:
+  font_families:
+    sans: "Inter, system-ui, sans-serif"
+    mono: "JetBrains Mono, Fira Code, monospace"
+    display: "Inter, sans-serif"
+  
+  scale:
+    xs: "0.75rem"    # 12px
+    sm: "0.875rem"   # 14px
+    base: "1rem"     # 16px
+    lg: "1.125rem"   # 18px
+    xl: "1.25rem"    # 20px
+    "2xl": "1.5rem"  # 24px
+    "3xl": "1.875rem" # 30px
+    "4xl": "2.25rem"  # 36px
+    "5xl": "3rem"     # 48px
+
+spacing:
+  scale: [0, 0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24]
+  unit: "rem"
+
+effects:
+  shadows:
+    sm: "0 1px 2px 0 rgba(0, 0, 0, 0.5)"
+    md: "0 4px 6px -1px rgba(0, 0, 0, 0.5)"
+    lg: "0 10px 15px -3px rgba(0, 0, 0, 0.5)"
+    xl: "0 20px 25px -5px rgba(0, 0, 0, 0.5)"
+    glow: "0 0 20px rgba(139, 92, 246, 0.3)"
+    glow_strong: "0 0 30px rgba(139, 92, 246, 0.5)"
+  
+  animations:
+    fade_in: "fadeIn 0.3s ease-in"
+    slide_up: "slideUp 0.4s ease-out"
+    pulse_glow: "pulseGlow 2s ease-in-out infinite"
+    float: "float 3s ease-in-out infinite"
+  
+  transitions:
+    fast: "150ms cubic-bezier(0.4, 0, 0.2, 1)"
+    base: "300ms cubic-bezier(0.4, 0, 0.2, 1)"
+    slow: "500ms cubic-bezier(0.4, 0, 0.2, 1)"
+
+components:
+  button:
+    primary: "bg-necro-purple hover:bg-necro-purple-dark text-ghost-white"
+    secondary: "bg-mist-gray hover:bg-fog-gray text-ghost-white"
+    ghost: "bg-transparent hover:bg-shadow-gray text-spirit-gray"
+    danger: "bg-danger-red hover:bg-red-600 text-ghost-white"
+  
+  card:
+    base: "bg-shadow-gray border border-fog-gray rounded-lg shadow-lg"
+    elevated: "bg-mist-gray border border-fog-gray rounded-lg shadow-xl"
+    glow: "bg-shadow-gray border border-necro-purple rounded-lg shadow-glow"
+  
+  input:
+    base: "bg-shadow-gray border border-fog-gray text-ghost-white rounded focus:border-necro-purple focus:ring-2 focus:ring-necro-purple/20"
+  
+  badge:
+    low: "bg-info-blue/20 text-info-blue border border-info-blue/30"
+    medium: "bg-warning-amber/20 text-warning-amber border border-warning-amber/30"
+    high: "bg-danger-red/20 text-danger-red border border-danger-red/30"
+    critical: "bg-danger-red text-ghost-white border border-danger-red"
+
+layout:
+  dashboard:
+    description: "Necromancer's laboratory - central command"
+    background: "void-black with subtle gradient"
+    accent: "necro-purple glow effects"
+    elements:
+      - "3 chamber cards with hover glow"
+      - "Floating particles animation"
+      - "Status indicators with pulse"
+  
+  chamber_pages:
+    description: "Individual ritual rooms"
+    layout: "Split view - input left, output right"
+    background: "shadow-gray with chamber-specific accent"
+    elements:
+      - "Chamber title with icon"
+      - "Input area with code editor styling"
+      - "Output area with results display"
+      - "Action buttons with glow on hover"
+
+ui_patterns:
+  loading_states:
+    - "Skeleton screens with shimmer"
+    - "Spinner with glow effect"
+    - "Progress bars with gradient"
+  
+  empty_states:
+    - "Ghost icon with message"
+    - "Call-to-action button"
+    - "Helpful tips"
+  
+  error_states:
+    - "Error icon with red glow"
+    - "Clear error message"
+    - "Retry action"
+
+accessibility:
+  - "WCAG AA contrast ratios minimum"
+  - "Focus indicators visible"
+  - "Keyboard navigation support"
+  - "Screen reader friendly"
+  - "Reduced motion support"
+
+file_generation:
+  tailwind_config: "tailwind.config.ts"
+  global_styles: "src/styles/globals.css"
+  theme_constants: "src/lib/theme/constants.ts"
+  component_styles: "src/components/ui/*.tsx"

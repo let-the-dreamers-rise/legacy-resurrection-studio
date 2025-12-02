@@ -1,0 +1,51 @@
+name: Performance Monitor
+description: Tracks build times, bundle sizes, and performance metrics
+
+triggers:
+  - event: on_build_complete
+    conditions:
+      - file_pattern: "src/**/*.{ts,tsx}"
+      - build_command: "npm run build"
+
+actions:
+  - name: measure_build_time
+    type: command
+    command: |
+      echo "Build completed at $(date)"
+      echo "Measuring bundle size..."
+      du -sh .next/static
+    
+  - name: check_bundle_size
+    type: command
+    command: |
+      # Check if bundle size exceeds threshold
+      SIZE=$(du -s .next/static | cut -f1)
+      THRESHOLD=5000  # 5MB in KB
+      if [ $SIZE -gt $THRESHOLD ]; then
+        echo "⚠️ Warning: Bundle size ($SIZE KB) exceeds threshold ($THRESHOLD KB)"
+      else
+        echo "✅ Bundle size ($SIZE KB) is within acceptable range"
+      fi
+  
+  - name: lighthouse_check
+    type: command
+    command: |
+      echo "Run Lighthouse audit with: npx lighthouse http://localhost:3000 --view"
+    
+  - name: notify_metrics
+    type: message
+    message: |
+      Performance metrics captured:
+      - Build time: Check console output
+      - Bundle size: Check .next/static directory
+      - Recommendation: Run Lighthouse for full performance audit
+
+metadata:
+  author: Legacy Resurrection Studio
+  version: 1.0.0
+  category: performance
+  tags:
+    - build
+    - optimization
+    - monitoring
+    - bundle-size

@@ -1,0 +1,26 @@
+name: Test Stub Generator Hook
+description: Auto-generates test stubs when new transformation mappings or utilities are added
+version: 1.0.0
+
+triggers:
+  - event: file_saved
+    file_patterns:
+      - "src/lib/**/*.ts"
+      - "!src/lib/**/*.test.ts"
+      - "!src/lib/**/types.ts"
+
+actions:
+  - type: agent_message
+    message: |
+      A library file was updated. Please:
+      1. Check if corresponding test file exists
+      2. If not, generate a test stub with basic test cases
+      3. If exists, verify test coverage is adequate for new functions
+      4. Ensure all public APIs have tests
+      
+      Updated file: {{file_path}}
+      Expected test file: {{file_path_without_ext}}.test.ts
+
+metadata:
+  priority: low
+  auto_approve: false
