@@ -147,10 +147,6 @@ This project showcases deep integration with Kiro AI's development workflow:
 
 - [Architecture Overview](./docs/architecture.md)
 - [Kiro Usage Deep Dive](./docs/kiro-usage.md)
-- [Demo Script (Detailed)](./docs/demo-script.md)
-- [Devpost Submission](./docs/devpost-draft.md)
-- [Blog Post Draft](./docs/blog-post-draft.md)
-
 ---
 
 ## 🎯 Use Cases
