@@ -38,7 +38,7 @@ export default function DocsPage() {
           </h3>
           <div className="bg-shadow-gray/50 backdrop-blur border border-fog-gray rounded-lg p-8">
             <p className="text-spirit-gray leading-relaxed mb-4">
-              Legacy Resurrection Studio is an enterprise-grade modernization platform that transforms outdated technologies into modern, maintainable architectures. The system employs three specialized "resurrection chambers" that analyze legacy code, detect patterns, and generate production-ready migration artifacts.
+              Legacy Resurrection Studio is an enterprise-grade modernization platform that transforms outdated technologies into modern, maintainable architectures. The system employs three specialized &ldquo;resurrection chambers&rdquo; that analyze legacy code, detect patterns, and generate production-ready migration artifacts.
             </p>
             <p className="text-spirit-gray leading-relaxed">
               Each chamber performs deep analysis using pattern detection engines, security scanners, and complexity scoring algorithms. The platform generates comprehensive migration plans with realistic timelines, cross-chamber routing suggestions, and production-ready code output. Built for real-world enterprise modernization projects requiring strategic planning and phased implementation.
