@@ -204,8 +204,6 @@ MIT License - see [LICENSE](./LICENSE) for details
 
 - **Live Demo**: [https://legacy-resurrection-studio.vercel.app](https://legacy-resurrection-studio.vercel.app)
 - **GitHub**: [https://github.com/let-the-dreamers-rise/legacy-resurrection-studio](https://github.com/let-the-dreamers-rise/legacy-resurrection-studio)
-- **Devpost**: [https://devpost.com/software/legacy-resurrection-studio](https://devpost.com/software/legacy-resurrection-studio)
-
 ---
 
 **Built with 💀👻 for Kiroween 2025**
